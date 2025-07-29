@@ -1,10 +1,10 @@
-// frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { User } from './types/user';
 
 function App() {
   const [message, setMessage] = useState('');
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const API_URL = process.env.REACT_APP_API_URL;
 
@@ -20,7 +20,7 @@ function App() {
       .then(res => res.json())
       .then(data => setUsers(data))
       .catch(err => console.error('Erreur lors de la récupération des utilisateurs :', err));
-  }, []);
+  }, [API_URL]);
 
   return (
     <div className="App">
