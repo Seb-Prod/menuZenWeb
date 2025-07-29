@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { User } from './types/user';
+import { useDeviceType } from './hooks/useDeviceType';
 
 function App() {
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState<User[]>([]);
-
+  
   const API_URL = process.env.REACT_APP_API_URL;
+
+  const deviceType = useDeviceType();
 
   useEffect(() => {
     // Appel au backend pour le message
@@ -25,6 +28,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Votre application React</h1>
+        <p>L'application tourne actuellement sur un appareil : <strong>{deviceType}</strong></p>
+
+        {deviceType === 'mobile' && (
+          <p>Contenu optimisé pour mobile.</p>
+        )}
+
+        {deviceType === 'tablet' && (
+          <p>Contenu optimisé pour tablette.</p>
+        )}
+
+        {deviceType === 'desktop' && (
+          <p>Contenu optimisé pour ordinateur de bureau.</p>
+        )}
         <h1>Mon Projet MERN Stack</h1>
         <p>Message du backend : {message}</p>
 
@@ -32,7 +49,7 @@ function App() {
         {users.length > 0 ? (
           <ul>
             {users.map(user => (
-              <li key={user.id}>{user.name} - {user.email}</li> 
+              <li key={user.id}>{user.name} - {user.email}</li>
             ))}
           </ul>
         ) : (

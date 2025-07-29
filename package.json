@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"cd backend && yarn dev\" \"cd frontend && yarn start\""
+    "start-dev": "concurrently \"cd backend && yarn dev\" \"cd frontend && yarn start\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
